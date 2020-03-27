@@ -1,0 +1,511 @@
+﻿<Page x:Class="LFSmodel.UserParameters"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LFSmodel"
+        mc:Ignorable="d"
+        d:DesignHeight="450" d:DesignWidth="800"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:c1="clr-namespace:LFSmodel"
+      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="LFSmodelHome" Margin="10,0,10,10">
+    <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
+        <Grid>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="1*" />
+
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!--<materialDesign:Card Padding="32" Margin="16">
+                <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}">My First Material Design App</TextBlock>
+            </materialDesign:Card> -->
+
+
+            <materialDesign:Card Grid.ColumnSpan="4" Grid.Row="0" Height="100" Padding=" 5" Margin="30" Background="#4E87D4">
+                <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White">Parameters</TextBlock>
+            </materialDesign:Card>
+
+            <materialDesign:Card Name="trackDistanceRadioBtn" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1" Padding="20">
+                <StackPanel >
+
+                    <Label FontWeight="Bold">Distance between tracks</Label>
+
+                    <StackPanel   Name="trackDistanceRadioBtnPanel" Orientation="Horizontal">
+                        <RadioButton Name ="DefaultDistance" GroupName="TrackDistance" Content="Default" Margin="5" Checked="Dist_Btn_Checked"/>
+                        <RadioButton Name ="CustomDistance" GroupName="TrackDistance" Content="Custom values" Margin="5" Checked="Dist_Btn_Checked"/>
+                    </StackPanel>
+
+                    <StackPanel Name="defaultDistancePanel" Visibility="Collapsed" >
+                        <ListBox x:Name="defaultDistanceValues"  Padding="10">
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Foreground" Value="Black" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0,2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="100" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{Binding Label}" />
+                                        <TextBlock Grid.Column="1" Text="{Binding Value}" />
+
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+
+                        </ListBox>
+                    </StackPanel>
+                    <Border Padding="10">
+                        <StackPanel Name="customDistancePanel" Visibility="Collapsed" HorizontalAlignment="Left">
+
+                            <StackPanel Orientation="Horizontal">
+
+                                <TextBox Name="MinimumDistanceTextbox" Width="140px" materialDesign:HintAssist.Hint="Minimum distance" FontSize="15"  PreviewTextInput="TextBox_validation" Validation.ErrorTemplate="{StaticResource validationErrorTemplate}">
+
+                                    <TextBox.Text>
+                                        <Binding Path="Name" Mode="TwoWay" UpdateSourceTrigger="LostFocus">
+                                            <Binding.ValidationRules>
+                                                <c1:NameValidator Name="MinimumDistance" Min="20" Opt="21" Max="99" />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+
+                                </TextBox>
+                                <Label FontWeight="Bold">m</Label>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox Name="OptimumDistanceTextbox" Width="140px" materialDesign:HintAssist.Hint="Optimum distance" FontSize="15" PreviewTextInput="TextBox_validation" Validation.ErrorTemplate="{StaticResource validationErrorTemplate}">
+                                    <TextBox.Text>
+                                        <Binding Path="Name" Mode="TwoWay" UpdateSourceTrigger="LostFocus">
+                                            <Binding.ValidationRules>
+                                                <c1:NameValidator Name="OptimumDistance"  Max="99" />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                                <Label FontWeight="Bold">m</Label>
+
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox Name="MaximumDistanceTextbox" Width="140px" materialDesign:HintAssist.Hint="Maximum distance" FontSize="15" PreviewTextInput="TextBox_validation" Validation.ErrorTemplate="{StaticResource validationErrorTemplate}">
+                                    <TextBox.Text>
+                                        <Binding Path="Name" Mode="TwoWay" UpdateSourceTrigger="LostFocus">
+                                            <Binding.ValidationRules>
+                                                <c1:NameValidator Name="MaximumDistance" Min="20" Opt="21" Max="99" />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                                <Label FontWeight="Bold">m</Label>
+                            </StackPanel>
+
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </materialDesign:Card>
+
+            <materialDesign:Card  Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="2" Padding="20">
+                <StackPanel Name="directionGroup">
+                    <StackPanel Name="trackDirectionRadioBtn" Grid.Column="1" Grid.Row="2">
+                        <Label FontWeight="Bold">Track and Wind direction</Label>
+                        <StackPanel Name="trackDirectionRadioBtnPanel" Orientation="Horizontal">
+                            <RadioButton Name ="WindDirecion" GroupName="TrackDirection" Content="Provide wind direction" Margin="5" Checked="Dir_Btn_Checked"/>
+                            <RadioButton Name ="TrackDirection" GroupName="TrackDirection" Content="Provide track direction" Margin="5" Checked="Dir_Btn_Checked"/>
+                            <RadioButton Name ="NeglectDirection" GroupName="TrackDirection" Content="Neglect direction" Margin="5" Checked="Dir_Btn_Checked"/>
+                        </StackPanel>
+                    </StackPanel>
+
+
+                    <StackPanel Name="windDirectionPanel" Grid.Column="3" Grid.Row="2" Visibility="Collapsed">
+                        <Label FontWeight="Bold">Please select the wind direction</Label>
+                        <ComboBox x:Name="windDirectionListBox"   SelectionChanged="comboBox_Direction"
+                                   SelectedIndex="0"
+                                   DisplayMemberPath="Label"
+                                   SelectedValuePath="Value">
+      
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel Name="trackDirectionPanel" Grid.Column="3" Grid.Row="2" Visibility="Collapsed" >
+                        <Label FontWeight="Bold">Please select the track direction</Label>
+                        <ComboBox x:Name="trackDirectionListBox" SelectionChanged="comboBox_Direction"
+                                   SelectedIndex="0"
+                                   DisplayMemberPath="Label"
+                                   SelectedValuePath="Value">
+                            
+                        </ComboBox>
+                    </StackPanel>
+                </StackPanel>
+            </materialDesign:Card>
+
+            <materialDesign:Card  Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="3" Padding="20">
+                <StackPanel Name="slopeGroup">
+                    <StackPanel Name="trackSlopeRadioBtn" Grid.Column="1" Grid.Row="3">
+                        <Label FontWeight="Bold">Slope of the tracks</Label>
+                        <StackPanel Name="trackSlopeRadioBtnPanel" Orientation="Horizontal">
+                            <RadioButton Name ="SlopeStandardTechnique" GroupName="TrackSlope" Content="Standard technique" Margin="5" Checked="Slope_Btn_Checked"/>
+                            <RadioButton Name ="SlopeExtremeTechnique" GroupName="TrackSlope" Content="Extreme technique" Margin="5" Checked="Slope_Btn_Checked"/>
+                            <RadioButton Name ="SlopeOtherTechnique" GroupName="TrackSlope" Content="Others" Margin="5" Checked="Slope_Btn_Checked"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Name="SlopeStandardPanel" Visibility="Collapsed" >
+                        <ListBox x:Name="SlopeStandardListBox"  Padding="10">
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Foreground" Value="Black" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0,2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="100" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{Binding Label}" />
+                                        <TextBlock Grid.Column="1" Text="{Binding Value}" />
+
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+
+                        </ListBox>
+                    </StackPanel>
+
+                    <StackPanel Name="SlopeExtremePanel" Visibility="Collapsed" >
+                        <ListBox x:Name="SlopeExtremeListBox"  Padding="10">
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Foreground" Value="Black" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0,2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="100" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{Binding Label}" />
+                                        <TextBlock Grid.Column="1" Text="{Binding Value}" />
+
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+
+                        </ListBox>
+                    </StackPanel>
+
+                
+                <Border Padding="10">
+                        <StackPanel Name="SlopeOthersPanel" Visibility="Collapsed" HorizontalAlignment="Left">
+                            <Label FontWeight="Bold">Please enter a value between -70 and +70</Label>
+                            <StackPanel Orientation="Horizontal">
+
+                                <TextBox Name="MinimumSlopeTextbox" Width="140px" materialDesign:HintAssist.Hint="Minimum slope" FontSize="15"  PreviewTextInput="TextBox_validation" Validation.ErrorTemplate="{StaticResource validationErrorTemplate}">
+
+                                <TextBox.Text>
+                                    <Binding Path="Name" Mode="TwoWay" UpdateSourceTrigger="LostFocus">
+                                        <Binding.ValidationRules>
+                                            <c1:NameValidator Name="MinimumSlope" Min="-70" Opt="0" Max="70" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+
+                            </TextBox>
+                                <Label FontWeight="Bold">%</Label>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                                <TextBox Name="OptimumSlopeTextbox" Width="140px" materialDesign:HintAssist.Hint="Optimum slope" FontSize="15" PreviewTextInput="TextBox_validation" Validation.ErrorTemplate="{StaticResource validationErrorTemplate}">
+                                <TextBox.Text>
+                                    <Binding Path="Name" Mode="TwoWay" UpdateSourceTrigger="LostFocus">
+                                        <Binding.ValidationRules>
+                                                <c1:NameValidator Name="OptimumSlope" Min="-70" Opt="0" Max="70" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                                <Label FontWeight="Bold">%</Label>
+
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                                <TextBox Name="MaximumSlopeTextbox" Width="140px" materialDesign:HintAssist.Hint="Maximum slope" FontSize="15" PreviewTextInput="TextBox_validation" Validation.ErrorTemplate="{StaticResource validationErrorTemplate}">
+                                <TextBox.Text>
+                                    <Binding Path="Name" Mode="TwoWay" UpdateSourceTrigger="LostFocus">
+                                        <Binding.ValidationRules>
+                                                <c1:NameValidator Name="MaximumSlope" Min="-70" Opt="0" Max="70" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                                <Label FontWeight="Bold">%</Label>
+                        </StackPanel>
+
+                    </StackPanel>
+                </Border>
+
+
+
+                </StackPanel>
+            </materialDesign:Card>
+
+            <materialDesign:Card  Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="4" Padding="20">
+                <StackPanel Name="SlopeAcrossGroup">
+                    <StackPanel Name="trackAcrossSlopeRadioBtn" Grid.Column="1" Grid.Row="4">
+                        <Label FontWeight="Bold">Slope across the tracks</Label>
+                        <StackPanel Name="trackAcrossSlopeRadioBtnPanel" Orientation="Horizontal">
+                            <RadioButton Name ="SlopeAcrossStandardTechnique" GroupName="SlopeAcrossTrack" Content="Standard technique" Margin="5" Checked="Slope_Across_Btn_Checked"/>
+                            <RadioButton Name ="SlopeAcrossExtremeTechnique" GroupName="SlopeAcrossTrack" Content="Extreme technique" Margin="5" Checked="Slope_Across_Btn_Checked"/>
+                            <RadioButton Name ="SlopeAcrossOtherTechnique" GroupName="SlopeAcrossTrack" Content="Others" Margin="5" Checked="Slope_Across_Btn_Checked"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Name="SlopeAcrossStandardPanel" Grid.Column="2" Grid.Row="4" Visibility="Collapsed" >
+                        <ListBox x:Name="SlopeAcrossStandardListBox"  Padding="10">
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Foreground" Value="Black" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0,2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="100" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{Binding Label}" />
+                                        <TextBlock Grid.Column="1" Text="{Binding Value}" />
+
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+
+                        </ListBox>
+                    </StackPanel>
+
+                    <StackPanel Name="SlopeAcrossExtremePanel" Grid.Column="2" Grid.Row="4" Visibility="Collapsed" >
+                        <ListBox x:Name="SlopeAcrossExtremeListBox"  Padding="10">
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Foreground" Value="Black" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0,2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="100" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{Binding Label}" />
+                                        <TextBlock Grid.Column="1" Text="{Binding Value}" />
+
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+
+                        </ListBox>
+                    </StackPanel>
+
+                    <Border Padding="10">
+                        <StackPanel Name="SlopeAcrossOthersPanel" Visibility="Collapsed" HorizontalAlignment="Left">
+                            <Label FontWeight="Bold">Please enter a value between -7 and +7</Label>
+                            <StackPanel Orientation="Horizontal">
+
+                                <TextBox Name="MinimumSlopeAcrossTextbox" Width="140px" materialDesign:HintAssist.Hint="Minimum slope" FontSize="15"  PreviewTextInput="TextBox_validation" Validation.ErrorTemplate="{StaticResource validationErrorTemplate}">
+
+                                    <TextBox.Text>
+                                        <Binding Path="Name" Mode="TwoWay" UpdateSourceTrigger="LostFocus">
+                                            <Binding.ValidationRules>
+                                                <c1:NameValidator Name="MinimumSlopeAcross" Min="-7" Opt="0" Max="7" />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+
+                                </TextBox>
+                                <Label FontWeight="Bold">%</Label>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox Name="OptimumSlopeAcrossTextbox" Width="140px" materialDesign:HintAssist.Hint="Optimum slope" FontSize="15" PreviewTextInput="TextBox_validation" Validation.ErrorTemplate="{StaticResource validationErrorTemplate}">
+                                    <TextBox.Text>
+                                        <Binding Path="Name" Mode="TwoWay" UpdateSourceTrigger="LostFocus">
+                                            <Binding.ValidationRules>
+                                                <c1:NameValidator Name="OptimumSlopeAcross" Min="-7" Opt="0" Max="7" />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                                <Label FontWeight="Bold">%</Label>
+
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox Name="MaximumSlopeAcrossTextbox" Width="140px" materialDesign:HintAssist.Hint="Maximum slope" FontSize="15" PreviewTextInput="TextBox_validation" Validation.ErrorTemplate="{StaticResource validationErrorTemplate}">
+                                    <TextBox.Text>
+                                        <Binding Path="Name" Mode="TwoWay" UpdateSourceTrigger="LostFocus">
+                                            <Binding.ValidationRules>
+                                                <c1:NameValidator Name="MaximumSlopeAcross" Min="-7" Opt="0" Max="7" />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                                <Label FontWeight="Bold">%</Label>
+                            </StackPanel>
+
+                        </StackPanel>
+                    </Border>
+                  
+
+
+                </StackPanel>
+            </materialDesign:Card>
+
+            <materialDesign:Card  Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="5" Padding="20">
+                <StackPanel Name="trackSlopeChangeGroup">
+                    <StackPanel Name="trackSlopeChangeRadioBtn" Grid.Column="1" Grid.Row="5">
+                        <Label FontWeight="Bold">Change in slope of the tracks</Label>
+                        <StackPanel Name="trackSlopeChangeRadioBtnPanel" Orientation="Horizontal">
+                            <RadioButton Name ="SlopeChangeDefault" GroupName="ChangeInSlope" Content="Normal/Default" Margin="5" Checked="Slope_Change_Btn_Checked"/>
+                            <RadioButton Name ="SlopeChangeOthers" GroupName="ChangeInSlope" Content="Others" Margin="5" Checked="Slope_Change_Btn_Checked"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="10" Name="slopeChangeNormalpanel" Grid.Column="2" Grid.Row="5" Visibility="Collapsed">
+                        <Label FontWeight="Bold">From</Label>
+                        <TextBox Name="slopeChangeNormalFrom"  IsReadOnly = "True">-15.5</TextBox>
+                        <Label>Degrees</Label>
+                        <Label FontWeight="Bold">To</Label>
+                        <TextBox Name="slopeChangeNormalTo" IsReadOnly = "True">15.5</TextBox>
+                        <Label>Degrees</Label>
+                    </StackPanel>
+
+                    <StackPanel Margin="10" Name="slopeChangeOthersPanel" Grid.Column="2" Grid.Row="5" Visibility="Collapsed">
+                        <Label FontWeight="Bold">Please enter a value between -15 and +15</Label>
+                        <StackPanel Orientation="Horizontal">
+                            <Label FontWeight="Bold">From</Label>
+                            <TextBox Name="slopeChangeOtherFromTextbox" Width="100px" FontSize="15" PreviewTextInput="TextBox_slope_change" Validation.ErrorTemplate="{StaticResource validationErrorTemplate}">
+                                <TextBox.Text>
+                                    <Binding Path="Name" Mode="TwoWay" UpdateSourceTrigger="LostFocus">
+                                        <Binding.ValidationRules>
+                                            <c1:NameValidator Name="slopeChangeOtherFrom" Min="-15" Opt="0" Max="15" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <Label FontWeight="Bold">°</Label>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                        <Label FontWeight="Bold">To</Label>
+                            <TextBox Name="slopeChangeOtherToTextbox" Width="100px"  FontSize="15" PreviewTextInput="TextBox_slope_change" Validation.ErrorTemplate="{StaticResource validationErrorTemplate}">
+                                <TextBox.Text>
+                                    <Binding Path="Name" Mode="TwoWay" UpdateSourceTrigger="LostFocus">
+                                        <Binding.ValidationRules>
+                                            <c1:NameValidator Name="slopeChangeOtherTo" Min="-15" Opt="0" Max="15" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <Label FontWeight="Bold">°</Label>
+                        </StackPanel>
+                        
+                    </StackPanel>
+                </StackPanel>
+            </materialDesign:Card>
+
+            <materialDesign:Card  Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="6" Padding="20">
+                <StackPanel Name="trackCurveRadiusGroup">
+                    <StackPanel Name="trackCurveRadiusRadioBtn" Grid.Column="1" Grid.Row="6">
+                        <Label FontWeight="Bold">Curve radius of the tracks</Label>
+                        <StackPanel Name="trackCurveRadiusRadioBtnPanel" Orientation="Horizontal">
+                            <RadioButton Name ="MaximumDeviationRadio" GroupName="TrackCurveRadius" Content="Maximum deviation" Margin="5" Checked="Curve_Radius_Btn_Checked"/>
+                            <RadioButton Name ="Others" GroupName="TrackCurveRadius" Content="Others" Margin="5" Checked="Curve_Radius_Btn_Checked"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel  Margin="10" Name="MaxDeviationTextBox" Grid.Column="1" Grid.Row="6" Visibility="Collapsed" >
+                        <Label FontWeight="Bold">Maximum deviation value</Label>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox Name="MaximumDeviation" IsReadOnly = "True">45</TextBox>
+                            <Label>Degrees</Label>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Margin="10" Name="otherDeviationPanel" Grid.Column="1" Grid.Row="6" Visibility="Collapsed">
+                        <Label FontWeight="Bold">Please enter a value less than 45 Degrees</Label>
+                        <StackPanel Orientation="Horizontal">
+                            <Label FontWeight="Bold">From</Label>
+                            <TextBox Name="otherDeviationTextBox" Width="100px"  FontSize="15" PreviewTextInput="TextBox_radius" Validation.ErrorTemplate="{StaticResource validationErrorTemplate}">
+                                <TextBox.Text>
+                                    <Binding Path="Name" Mode="TwoWay" UpdateSourceTrigger="LostFocus">
+                                        <Binding.ValidationRules>
+                                            <c1:NameValidator Name="OtherDeviation" Min="0" Opt="0" Max="45" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <Label FontWeight="Bold">°</Label>
+                           
+                        </StackPanel>
+
+                    </StackPanel>
+
+                   
+                </StackPanel>
+            </materialDesign:Card>
+
+
+            <!-- View report button -->
+            <Button Grid.Column="2" Grid.Row="7" Margin="0,10,0,0" Width="125" Click="Submit_Clicked"
+Height="25" HorizontalAlignment="Right">SAVE</Button>
+        </Grid>
+    </ScrollViewer>
+</Page>
